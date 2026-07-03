@@ -5,31 +5,49 @@ const PRODUCTS_URL = 'https://hassanegypt139-max.github.io/mushaf-store/products
 
 let allProducts = [];
 let currentFilter = 'all';
+let refreshInterval = null;
+
+// ========================================
+//  حماية النصوص من XSS
+// ========================================
+function escapeHTML(str) {
+    if (!str && str !== 0) return '';
+    const div = document.createElement('div');
+    div.textContent = String(str);
+    return div.innerHTML;
+}
 
 // ========================================
 //  تحميل المنتجات من GitHub
 // ========================================
 async function loadProducts() {
+    const listEl = document.getElementById('productsList');
+    if (listEl && allProducts.length === 0) {
+        listEl.innerHTML = '<div class="loading"><p>جارٍ تحميل المنتجات...</p></div>';
+    }
+
     try {
         const response = await fetch(PRODUCTS_URL + '?t=' + Date.now());
         if (!response.ok) throw new Error('Network error');
         const data = await response.json();
-        
-        allProducts = [...(data.amazon || []), ...(data.noon || [])];
-        
+
+        // دمج مع إضافة خاصية store تلقائياً
+        const amazonProducts = (data.amazon || []).map(p => ({ ...p, store: 'amazon' }));
+        const noonProducts   = (data.noon   || []).map(p => ({ ...p, store: 'noon'   }));
+        allProducts = [...amazonProducts, ...noonProducts];
+
         if (data.lastUpdate) {
             const updateEl = document.getElementById('lastUpdate');
             if (updateEl) {
-                updateEl.textContent = '🔄 آخر تحديث: ' + data.lastUpdate;
+                updateEl.textContent = 'آخر تحديث: ' + escapeHTML(data.lastUpdate);
             }
         }
-        
+
         displayProducts();
     } catch (error) {
         console.error('خطأ في تحميل المنتجات:', error);
-        const listEl = document.getElementById('productsList');
         if (listEl) {
-            listEl.innerHTML = '<div class="loading"><p>❌ حدث خطأ في تحميل المنتجات</p><p style="font-size:12px;color:#999">تأكد من الاتصال بالإنترنت</p></div>';
+            listEl.innerHTML = '<div class="loading"><p>حدث خطأ في تحميل المنتجات</p><p style="font-size:12px;color:#999">تأكد من الاتصال بالإنترنت وحاول مرة أخرى</p></div>';
         }
     }
 }
@@ -40,35 +58,69 @@ async function loadProducts() {
 function displayProducts() {
     const container = document.getElementById('productsList');
     if (!container) return;
-    
+
     if (allProducts.length === 0) {
         container.innerHTML = '<div class="loading"><p>لا توجد منتجات متاحة حالياً</p></div>';
         return;
     }
-    
-    container.innerHTML = allProducts.map(p => `
-        <div class="product-card" data-category="${p.category || 'other'}" data-store="${p.store}">
+
+    // Placeholder كـ Data URI بدل خدمة خارجية
+    const placeholderImg = "data:image/svg+xml," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
+        '<rect width="200" height="200" fill="#0f5132"/>' +
+        '<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" ' +
+        'fill="#d4af37" font-size="16">منتج</text></svg>'
+    );
+
+    container.innerHTML = allProducts.map((p, index) => {
+        const storeName   = p.store === 'amazon' ? 'أمازون' : 'نون';
+        const storeIcon   = p.store === 'amazon' ? '&#128722;' : '&#128717;';
+        const hasDiscount = p.discount && Number(p.discount) > 0;
+        const safeId      = escapeHTML(String(p.id || index));
+
+        return `
+        <div class="product-card" 
+             data-category="${escapeHTML(p.category || 'other')}" 
+             data-store="${p.store}">
             <div class="store-badge ${p.store}">
-                ${p.store === 'amazon' ? '🛒 أمازون' : '🛍️ نون'}
+                ${storeIcon} ${storeName}
             </div>
-            ${p.discount ? `<div class="discount-badge">-${p.discount}</div>` : ''}
-            <img src="${p.image}" alt="${p.name}" loading="lazy" 
-                 onerror="this.src='https://via.placeholder.com/200x200/0f5132/d4af37?text=منتج'">
+            ${hasDiscount ? `<div class="discount-badge">-${escapeHTML(String(p.discount))}</div>` : ''}
+            <img src="${escapeHTML(p.image)}" 
+                 alt="${escapeHTML(p.name)}" 
+                 loading="lazy" 
+                 onerror="this.src='${placeholderImg}'">
             <div class="product-info">
-                <h3>${p.name}</h3>
-                <div class="rating">⭐ ${p.rating || '4.5'}</div>
+                <h3>${escapeHTML(p.name)}</h3>
+                <div class="rating">&#11088; ${escapeHTML(String(p.rating || '4.5'))}</div>
                 <div class="price">
-                    <span class="new-price">${p.price} ج.م</span>
-                    ${p.oldPrice ? `<span class="old-price">${p.oldPrice} ج.م</span>` : ''}
+                    <span class="new-price">${escapeHTML(String(p.price))} ج.م</span>
+                    ${p.oldPrice ? `<span class="old-price">${escapeHTML(String(p.oldPrice))} ج.م</span>` : ''}
                 </div>
-                <a href="${p.affiliateLink}" target="_blank" 
+                <a href="${escapeHTML(p.affiliateLink)}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
                    class="buy-btn ${p.store === 'noon' ? 'noon' : ''}"
-                   onclick="trackClick('${p.store}', '${p.id}')">
-                    🛒 اشترِ من ${p.store === 'amazon' ? 'أمازون' : 'نون'}
+                   data-store="${p.store}" 
+                   data-id="${safeId}">
+                    &#128722; اشترِ من ${storeName}
                 </a>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
+
+    // ربط أحداث النقر عبر addEventListener بدلاً من onclick
+    container.querySelectorAll('.buy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            trackClick(this.dataset.store, this.dataset.id);
+        });
+    });
+
+    // إعادة تطبيق الفلتر الحالي بعد إعادة العرض
+    if (currentFilter !== 'all') {
+        filterByCategory(currentFilter, document.querySelector('.cat-btn.active'));
+    }
 }
 
 // ========================================
@@ -76,56 +128,83 @@ function displayProducts() {
 // ========================================
 function filterByCategory(category, btn) {
     currentFilter = category;
-    
+
     if (btn) {
         document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     }
-    
+
+    // إعادة تطبيق البحث أيضاً إذا كان هناك نص بحث
+    const searchEl = document.getElementById('searchInput');
+    const query = searchEl ? searchEl.value.toLowerCase().trim() : '';
+
     document.querySelectorAll('.product-card').forEach(card => {
         const store = card.dataset.store;
-        const cat = card.dataset.category;
-        
-        if (category === 'all') {
-            card.style.display = 'block';
-        } else if (category === 'amazon' || category === 'noon') {
-            card.style.display = store === category ? 'block' : 'none';
-        } else {
-            card.style.display = cat === category ? 'block' : 'none';
+        const cat   = card.dataset.category;
+        const name  = (card.querySelector('h3') || {}).textContent || '';
+        const nameLower = name.toLowerCase();
+
+        // شرط الفئة
+        let matchCategory = true;
+        if (category === 'amazon' || category === 'noon') {
+            matchCategory = (store === category);
+        } else if (category !== 'all') {
+            matchCategory = (cat === category);
         }
+
+        // شرط البحث
+        let matchSearch = true;
+        if (query) {
+            matchSearch = nameLower.includes(query);
+        }
+
+        card.style.display = (matchCategory && matchSearch) ? 'block' : 'none';
     });
 }
 
 // ========================================
-//  البحث في المنتجات
+//  البحث في المنتجات (مع debounce)
 // ========================================
+let searchTimer = null;
+
 function filterProducts() {
-    const searchEl = document.getElementById('searchInput');
-    if (!searchEl) return;
-    
-    const query = searchEl.value.toLowerCase();
-    document.querySelectorAll('.product-card').forEach(card => {
-        const nameEl = card.querySelector('h3');
-        if (!nameEl) return;
-        
-        const name = nameEl.textContent.toLowerCase();
-        card.style.display = name.includes(query) ? 'block' : 'none';
-    });
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+        // إعادة استخدام filterByCategory لضمان التوافق
+        filterByCategory(currentFilter, document.querySelector('.cat-btn.active'));
+    }, 200);
 }
 
 // ========================================
 //  تتبع النقرات على المنتجات
 // ========================================
 function trackClick(store, productId) {
-    console.log('🛒 نقر على:', store, productId);
+    console.log('نقر على:', store, productId);
 }
 
 // ========================================
 //  تشغيل عند تحميل الصفحة
 // ========================================
-document.addEventListener('DOMContentLoaded', loadProducts);
+document.addEventListener('DOMContentLoaded', () => {
+    loadProducts();
 
-// ========================================
-//  تحديث تلقائي كل 5 دقائق
-// ========================================
-setInterval(loadProducts, 5 * 60 * 1000);
+    // تحديث تلقائي كل 5 دقائق
+    // يتوقف تلقائياً عندما تكون الصفحة مخفية
+    refreshInterval = setInterval(() => {
+        if (!document.hidden) {
+            loadProducts();
+        }
+    }, 5 * 60 * 1000);
+});
+
+// تنظيف الـ interval عند إغلاق الصفحة
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && refreshInterval) {
+        clearInterval(refreshInterval);
+        refreshInterval = null;
+    } else if (!document.hidden && !refreshInterval) {
+        refreshInterval = setInterval(() => {
+            if (!document.hidden) loadProducts();
+        }, 5 * 60 * 1000);
+    }
+});
