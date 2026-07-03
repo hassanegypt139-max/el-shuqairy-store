@@ -1,0 +1,21 @@
+{
+  "name": "متجر الشقيري للمواد التجارية",
+  "short_name": "الشقيري",
+  "description": "أفضل العروض والخصومات من أمازون مصر ونون مصر",
+  "start_url": "/mushaf-store/",
+  "display": "standalone",
+  "background_color": "#f4f6f5",
+  "theme_color": "#0f5132",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["shopping", "electronics"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f5132'/%3E%3Cpath d='M30 35h40l-5 40H35z' fill='%23d4af37'/%3E%3Cpath d='M40 35V25a10 10 0 0120 0v10' fill='none' stroke='%23d4af37' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
