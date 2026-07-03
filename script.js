@@ -1,6 +1,6 @@
 async function loadProducts() {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/USERNAME/REPO/main/products.json');
+const response = await fetch('https://hassanegypt139-max.github.io/mushaf-store/products.json');
         const data = await response.json();
         return data.products;
     } catch (error) {
