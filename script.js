@@ -1,13 +1,4 @@
 // ========================================
-//  رابط ملف المنتجات
-// ========================================
-const PRODUCTS_URL = 'https://hassanegypt139-max.github.io/mushaf-store/products.json';
-
-let allProducts = [];
-let currentFilter = 'all';
-let refreshInterval = null;
-
-// ========================================
 //  حماية النصوص من XSS
 // ========================================
 function escapeHTML(str) {
@@ -21,74 +12,54 @@ function escapeHTML(str) {
 //  تحميل المنتجات من GitHub
 // ========================================
 async function loadProducts() {
-    const listEl = document.getElementById('productsList');
-    if (listEl && allProducts.length === 0) {
-        listEl.innerHTML = '<div class="loading"><p>جارٍ تحميل المنتجات...</p></div>';
-    }
-
     try {
-        const response = await fetch(PRODUCTS_URL + '?t=' + Date.now());
+        const response = await fetch('https://hassanegypt139-max.github.io/mushaf-store/products.json?t=' + Date.now());
         if (!response.ok) throw new Error('Network error');
         const data = await response.json();
 
-        // دمج مع إضافة خاصية store تلقائياً
+        // دمج أمازون ونون مع إضافة خاصية store
         const amazonProducts = (data.amazon || []).map(p => ({ ...p, store: 'amazon' }));
         const noonProducts   = (data.noon   || []).map(p => ({ ...p, store: 'noon'   }));
-        allProducts = [...amazonProducts, ...noonProducts];
+        return [...amazonProducts, ...noonProducts];
 
-        if (data.lastUpdate) {
-            const updateEl = document.getElementById('lastUpdate');
-            if (updateEl) {
-                updateEl.textContent = 'آخر تحديث: ' + escapeHTML(data.lastUpdate);
-            }
-        }
-
-        displayProducts();
     } catch (error) {
         console.error('خطأ في تحميل المنتجات:', error);
-        if (listEl) {
-            listEl.innerHTML = '<div class="loading"><p>حدث خطأ في تحميل المنتجات</p><p style="font-size:12px;color:#999">تأكد من الاتصال بالإنترنت وحاول مرة أخرى</p></div>';
-        }
+        return [];
     }
 }
 
 // ========================================
 //  عرض المنتجات في الصفحة
 // ========================================
-function displayProducts() {
+async function displayProducts() {
     const container = document.getElementById('productsList');
     if (!container) return;
 
-    if (allProducts.length === 0) {
-        container.innerHTML = '<div class="loading"><p>لا توجد منتجات متاحة حالياً</p></div>';
+    container.innerHTML = '<p style="text-align:center;width:100%">جارٍ تحميل المنتجات...</p>';
+
+    const products = await loadProducts();
+
+    if (products.length === 0) {
+        container.innerHTML = '<p style="text-align:center;padding:20px">لا توجد منتجات متاحة حالياً</p>';
         return;
     }
 
-    // Placeholder كـ Data URI بدل خدمة خارجية
     const placeholderImg = "data:image/svg+xml," + encodeURIComponent(
         '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">' +
         '<rect width="200" height="200" fill="#0f5132"/>' +
         '<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" ' +
-        'fill="#d4af37" font-size="16">منتج</text></svg>'
+        'fill="#d4af37" font-size="16">&#1605;&#1606;&#1578;&#1580;</text></svg>'
     );
 
-    container.innerHTML = allProducts.map((p, index) => {
+    container.innerHTML = products.map(p => {
         const storeName   = p.store === 'amazon' ? 'أمازون' : 'نون';
-        const storeIcon   = p.store === 'amazon' ? '&#128722;' : '&#128717;';
         const hasDiscount = p.discount && Number(p.discount) > 0;
-        const safeId      = escapeHTML(String(p.id || index));
 
         return `
-        <div class="product-card" 
-             data-category="${escapeHTML(p.category || 'other')}" 
-             data-store="${p.store}">
-            <div class="store-badge ${p.store}">
-                ${storeIcon} ${storeName}
-            </div>
+        <div class="product-card" data-store="${p.store}" data-category="${escapeHTML(p.category || 'other')}">
+            <div class="store-badge ${p.store}">${p.store === 'amazon' ? '&#128722;' : '&#128717;'} ${storeName}</div>
             ${hasDiscount ? `<div class="discount-badge">-${escapeHTML(String(p.discount))}</div>` : ''}
-            <img src="${escapeHTML(p.image)}" 
-                 alt="${escapeHTML(p.name)}" 
-                 loading="lazy" 
+            <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" loading="lazy" 
                  onerror="this.src='${placeholderImg}'">
             <div class="product-info">
                 <h3>${escapeHTML(p.name)}</h3>
@@ -97,114 +68,16 @@ function displayProducts() {
                     <span class="new-price">${escapeHTML(String(p.price))} ج.م</span>
                     ${p.oldPrice ? `<span class="old-price">${escapeHTML(String(p.oldPrice))} ج.م</span>` : ''}
                 </div>
-                <a href="${escapeHTML(p.affiliateLink)}" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   class="buy-btn ${p.store === 'noon' ? 'noon' : ''}"
-                   data-store="${p.store}" 
-                   data-id="${safeId}">
+                <a href="${escapeHTML(p.affiliateLink)}" target="_blank" rel="noopener noreferrer" class="buy-btn ${p.store === 'noon' ? 'noon' : ''}">
                     &#128722; اشترِ من ${storeName}
                 </a>
             </div>
         </div>
         `;
     }).join('');
-
-    // ربط أحداث النقر عبر addEventListener بدلاً من onclick
-    container.querySelectorAll('.buy-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            trackClick(this.dataset.store, this.dataset.id);
-        });
-    });
-
-    // إعادة تطبيق الفلتر الحالي بعد إعادة العرض
-    if (currentFilter !== 'all') {
-        filterByCategory(currentFilter, document.querySelector('.cat-btn.active'));
-    }
-}
-
-// ========================================
-//  تصفية حسب الفئة أو المتجر
-// ========================================
-function filterByCategory(category, btn) {
-    currentFilter = category;
-
-    if (btn) {
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
-
-    // إعادة تطبيق البحث أيضاً إذا كان هناك نص بحث
-    const searchEl = document.getElementById('searchInput');
-    const query = searchEl ? searchEl.value.toLowerCase().trim() : '';
-
-    document.querySelectorAll('.product-card').forEach(card => {
-        const store = card.dataset.store;
-        const cat   = card.dataset.category;
-        const name  = (card.querySelector('h3') || {}).textContent || '';
-        const nameLower = name.toLowerCase();
-
-        // شرط الفئة
-        let matchCategory = true;
-        if (category === 'amazon' || category === 'noon') {
-            matchCategory = (store === category);
-        } else if (category !== 'all') {
-            matchCategory = (cat === category);
-        }
-
-        // شرط البحث
-        let matchSearch = true;
-        if (query) {
-            matchSearch = nameLower.includes(query);
-        }
-
-        card.style.display = (matchCategory && matchSearch) ? 'block' : 'none';
-    });
-}
-
-// ========================================
-//  البحث في المنتجات (مع debounce)
-// ========================================
-let searchTimer = null;
-
-function filterProducts() {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
-        // إعادة استخدام filterByCategory لضمان التوافق
-        filterByCategory(currentFilter, document.querySelector('.cat-btn.active'));
-    }, 200);
-}
-
-// ========================================
-//  تتبع النقرات على المنتجات
-// ========================================
-function trackClick(store, productId) {
-    console.log('نقر على:', store, productId);
 }
 
 // ========================================
 //  تشغيل عند تحميل الصفحة
 // ========================================
-document.addEventListener('DOMContentLoaded', () => {
-    loadProducts();
-
-    // تحديث تلقائي كل 5 دقائق
-    // يتوقف تلقائياً عندما تكون الصفحة مخفية
-    refreshInterval = setInterval(() => {
-        if (!document.hidden) {
-            loadProducts();
-        }
-    }, 5 * 60 * 1000);
-});
-
-// تنظيف الـ interval عند إغلاق الصفحة
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden && refreshInterval) {
-        clearInterval(refreshInterval);
-        refreshInterval = null;
-    } else if (!document.hidden && !refreshInterval) {
-        refreshInterval = setInterval(() => {
-            if (!document.hidden) loadProducts();
-        }, 5 * 60 * 1000);
-    }
-});
+document.addEventListener('DOMContentLoaded', displayProducts);
