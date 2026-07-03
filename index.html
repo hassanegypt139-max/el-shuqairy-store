@@ -1,1 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>متجر الشقيري - تسوق من أمازون مصر ونون مصر | أفضل العروض والخصومات</title>
+    <meta name="description" content="متجر الشقيري للمواد التجارية - أفضل العروض والخصومات من أمازون مصر ونون مصر. هواتف، إلكترونيات، قطع غيار وأكثر.">
+    <meta name="keywords" content="أمازون مصر, نون مصر, عروض, خصومات, هواتف, إلكترونيات, متجر الشقيري">
+    <meta name="author" content="الشقيري للمواد التجارية">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://hassanegypt139-max.github.io/mushaf-store/">
+    <meta property="og:title" content="متجر الشقيري - أفضل العروض من أمازون ونون">
+    <meta property="og:description" content="تسوق أفضل المنتجات بأقل الأسعار من أمازون مصر ونون مصر">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hassanegypt139-max.github.io/mushaf-store/">
+    <meta property="og:locale" content="ar_EG">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f5132">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f5132'/%3E%3Cpath d='M30 35h40l-5 40H35z' fill='%23d4af37'/%3E%3Cpath d='M40 35V25a10 10 0 0120 0v10' fill='none' stroke='%23d4af37' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+    <div class="page-loader" id="pageLoader"><div class="loader-spinner"></div></div>
+    <div class="toast-container" id="toastContainer"></div>
 
+    <div class="top-bar" id="topBar">
+        <button class="top-bar-close" id="topBarClose" aria-label="إغلاق">&times;</button>
+        <span><span class="gold-dot"></span><span data-i18n="topBar">شحن مجاني على الطلبات فوق 350 جنيه | كود خصم حصري لأتباعنا</span></span>
+    </div>
+
+    <header class="header" id="header">
+        <a href="#" class="header-logo" aria-label="متجر الشقيري">
+            <div class="logo-icon">🛒</div>
+            <div>
+                <h1 data-i18n="logoTitle">متجر الشقيري</h1>
+                <span class="logo-sub" data-i18n="logoSub">أمازون • نون</span>
+            </div>
+        </a>
+        <div class="header-search">
+            <input type="search" id="searchInput" placeholder="ابحث عن منتج..." autocomplete="off" aria-label="البحث">
+            <span class="search-icon">🔍</span>
+        </div>
+        <div class="header-actions">
+            <button class="header-btn lang-btn" id="langToggle" title="تغيير اللغة">EN</button>
+            <button class="header-btn" id="darkToggle" title="الوضع الداكن"><span id="darkIcon">🌙</span></button>
+            <button class="header-btn" id="adminBtn" title="لوحة التحكم" style="display:none;"><span>⚙</span></button>
+            <button class="header-btn" id="cartToggle" title="سلة التسوق"><span>🛒</span><span class="badge" id="cartBadge" style="display:none;">0</span></button>
+        </div>
+    </header>
+
+    <nav class="nav" id="mainNav">
+        <div class="nav-inner" id="navInner">
+            <span class="nav-divider"></span>
+            <button class="nav-store amazon" data-store="amazon"><span class="store-dot"></span>Amazon</button>
+            <button class="nav-store noon" data-store="noon"><span class="store-dot"></span>Noon</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="heroSection">
+        <div class="hero-content">
+            <h2 data-i18n="heroTitle">تسوق <span class="gold">أفضل المنتجات</span> بأقل الأسعار</h2>
+            <p data-i18n="heroDesc">اكتشف أحدث العروض والخصومات من أمازون مصر ونون مصر. منتجات في مختلف الفئات بأسعار تنافسية.</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="stat-num" id="statProducts">0</div><div class="stat-label" data-i18n="statProducts">منتج متاح</div></div>
+                <div class="hero-stat"><div class="stat-num" id="statDiscount">0%</div><div class="stat-label" data-i18n="statDiscount">خصم حتى</div></div>
+                <div class="hero-stat"><div class="stat-num">2</div><div class="stat-label" data-i18n="statStores">متاجر موثوقة</div></div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <aside class="filter-sidebar" id="filterSidebar">
+            <button class="filter-close-mobile" id="filterCloseMobile" style="display:none;" aria-label="إغلاق">&times;</button>
+            <div class="filter-card">
+                <div class="filter-title"><span data-i18n="filterStore">المتجر</span></div>
+                <div class="store-filter">
+                    <button class="store-chip amazon" data-store="amazon">🔍 Amazon</button>
+                    <button class="store-chip noon" data-store="noon">🔍 Noon</button>
+                </div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-title"><span data-i18n="filterCategory">القسم</span><button class="clear-btn" id="clearCategory">مسح الكل</button></div>
+                <div class="category-list" id="categoryList"></div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-title"><span data-i18n="filterPrice">نطاق السعر</span></div>
+                <div class="price-range-wrap">
+                    <input type="range" id="priceRange" min="0" max="50000" value="50000" step="100">
+                    <div class="price-labels"><span>0 ج.م</span><span class="current-price" id="priceLabel">50,000 ج.م</span></div>
+                </div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-title"><span data-i18n="filterRating">التقييم</span><button class="clear-btn" id="clearRating">مسح الكل</button></div>
+                <div id="ratingFilter">
+                    <div class="rating-option" data-rating="4"><span class="rating-stars">★★★★☆</span><span>4 فأعلى</span></div>
+                    <div class="rating-option" data-rating="3"><span class="rating-stars">★★★☆☆</span><span>3 فأعلى</span></div>
+                    <div class="rating-option active" data-rating="0"><span class="rating-stars">★★★★★</span><span>كل التقييمات</span></div>
+                </div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-title"><span data-i18n="filterSort">ترتيب حسب</span></div>
+                <select class="sort-select" id="sortSelect">
+                    <option value="default">الافتراضي</option>
+                    <option value="price-asc">السعر: من الأقل</option>
+                    <option value="price-desc">السعر: من الأعلى</option>
+                    <option value="rating-desc">التقييم الأعلى</option>
+                    <option value="discount-desc">أكبر خصم</option>
+                    <option value="name-asc">الاسم أ-ي</option>
+                </select>
+            </div>
+        </aside>
+
+        <div class="product-area" id="productArea">
+            <div class="product-area-header">
+                <div class="results-count"><span>عرض</span> <strong id="resultNum">0</strong> <span>منتج</span></div>
+                <select class="sort-mobile" id="sortMobile">
+                    <option value="default">الافتراضي</option>
+                    <option value="price-asc">السعر: الأقل</option>
+                    <option value="price-desc">السعر: الأعلى</option>
+                    <option value="rating-desc">التقييم</option>
+                    <option value="discount-desc">الخصم</option>
+                </select>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+            <div class="no-results" id="noResults" style="display:none;">
+                <div class="nr-icon">🔍</div>
+                <h3>لا توجد نتائج</h3>
+                <p>جرب تغيير معايير البحث أو التصفية</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="productModal" role="dialog" aria-modal="true">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body">
+                <div class="modal-img-section"><img id="modalImage" src="" alt="" loading="lazy"></div>
+                <div class="modal-info">
+                    <div class="modal-store-tag" id="modalStoreTag"><span id="modalStoreName"></span></div>
+                    <h2 class="modal-product-name" id="modalName"></h2>
+                    <div class="modal-category" id="modalCategory"></div>
+                    <div class="modal-rating"><span class="stars" id="modalStars"></span><span class="rate-text" id="modalRateText"></span></div>
+                    <div class="modal-price-section">
+                        <span class="modal-price-current" id="modalPrice"></span>
+                        <span class="modal-price-old" id="modalOldPrice"></span>
+                        <div class="modal-discount-badge" id="modalDiscount"></div>
+                        <div class="modal-savings" id="modalSavings"></div>
+                    </div>
+                    <div class="modal-features"><h4>تفاصيل المنتج</h4><ul id="modalFeatures"></ul></div>
+                    <div class="modal-actions">
+                        <a class="btn-buy" id="modalBuyBtn" href="#" target="_blank" rel="noopener"><span>اشتري الآن</span><span>↗</span></a>
+                        <button class="btn-cart-modal" id="modalCartBtn">🛒</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><span>🛒</span><span>سلة التسوق</span><span class="cart-count-badge" id="cartCountBadge">0</span></h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty"><div class="empty-icon">🛒</div><p>السلة فارغة</p></div></div>
+        <div class="cart-footer" id="cartFooter" style="display:none;">
+            <div class="cart-total"><span class="total-label">الإجمالي</span><span class="total-amount" id="cartTotal">0 ج.م</span></div>
+            <button class="btn-checkout" id="checkoutBtn"><span>إتمام الشراء من المتاجر</span><span>↗</span></button>
+            <button class="btn-clear-cart" id="clearCartBtn">تفريغ السلة</button>
+        </div>
+    </aside>
+
+    <div class="admin-overlay" id="adminOverlay">
+        <div class="admin-panel">
+            <div class="admin-header">
+                <h3><span>⚙</span> لوحة تحكم المنتجات</h3>
+                <button class="admin-close" id="adminClose">&times;</button>
+            </div>
+            <div class="admin-body">
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="list">قائمة المنتجات</button>
+                    <button class="admin-tab" data-tab="add">إضافة منتج</button>
+                    <button class="admin-tab" data-tab="export">تصدير</button>
+                </div>
+                <div class="admin-tab-content" id="adminTabList"><div class="admin-product-list" id="adminProductList"></div></div>
+                <div class="admin-tab-content" id="adminTabAdd" style="display:none;">
+                    <form class="admin-form" id="adminForm">
+                        <div class="form-group"><label>المتجر</label><select id="formStore" required><option value="amazon">Amazon</option><option value="noon">Noon</option></select></div>
+                        <div class="form-group"><label>القسم</label><select id="formCategory" required><option value="electronics">إلكترونيات</option><option value="mobiles">هواتف</option><option value="parts">قطع غيار</option><option value="fashion">أزياء</option><option value="home">المنزل</option><option value="beauty">جمال وعناية</option><option value="sports">رياضة</option><option value="kids">أطفال</option></select></div>
+                        <div class="form-group full-width"><label>اسم المنتج</label><input type="text" id="formName" required placeholder="مثال: سماعة بلوتوث"></div>
+                        <div class="form-group"><label>السعر (ج.م)</label><input type="number" id="formPrice" required min="0" placeholder="1999"></div>
+                        <div class="form-group"><label>السعر قبل الخصم</label><input type="number" id="formOldPrice" min="0" placeholder="2999"></div>
+                        <div class="form-group"><label>رابط الصورة</label><input type="url" id="formImage" required placeholder="https://..."></div>
+                        <div class="form-group"><label>رابط الأفيليت</label><input type="url" id="formAffiliate" required placeholder="https://..."></div>
+                        <div class="form-group"><label>التقييم (1-5)</label><input type="number" id="formRating" min="1" max="5" step="0.1" value="4.5"></div>
+                        <div class="form-group"><label>نسبة الخصم %</label><input type="number" id="formDiscount" min="0" max="99" value="10"></div>
+                        <div class="admin-actions-bar full-width">
+                            <button type="submit" class="btn-admin-save" id="adminSaveBtn">حفظ المنتج</button>
+                            <button type="button" class="btn-admin-cancel" id="adminCancelBtn">إلغاء</button>
+                        </div>
+                        <input type="hidden" id="formEditId" value="">
+                    </form>
+                </div>
+                <div class="admin-tab-content" id="adminTabExport" style="display:none;">
+                    <p style="margin-bottom:16px;font-size:14px;color:var(--text-light);">قم بتصدير ملف products.json وارفعه على GitHub لتحديث المتجر نهائياً.</p>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <button class="btn-admin-export" id="exportJsonBtn">تصدير products.json</button>
+                        <button class="btn-admin-save" id="importJsonBtn">استيراد من ملف</button>
+                        <input type="file" id="importFileInput" accept=".json" style="display:none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-overlay" id="filterOverlay"></div>
+    <button class="filter-toggle-mobile" id="filterToggleMobile"><span>🔍</span><span>تصفية المنتجات</span></button>
+    <button class="scroll-top" id="scrollTopBtn">▲</button>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>عن المتجر</h4>
+                <p>متجر الشقيري للمواد التجارية - نوفر لك أفضل المنتجات من أكبر المتاجر الإلكترونية في مصر بأقل الأسعار.</p>
+            </div>
+            <div class="footer-col">
+                <h4>روابط سريعة</h4>
+                <p><a href="https://www.amazon.eg" target="_blank" rel="noopener">Amazon Egypt</a><br><a href="https://www.noon.com/egypt-ar/" target="_blank" rel="noopener">Noon Egypt</a></p>
+            </div>
+            <div class="footer-col">
+                <h4>الأقسام</h4>
+                <p id="footerCategories"></p>
+            </div>
+            <div class="footer-col">
+                <h4>المدونة</h4>
+                <p>تابع مدونة الشقيري للمواد التجارية للحصول على أحدث العروض والتخفيضات.</p>
+                <a href="https://hshukairy.blogspot.com/" target="_blank" rel="noopener" class="footer-blog-link">📰 الشقيري للمواد التجارية</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; <span id="footerYear"></span> متجر الشقيري للمواد التجارية</span>
+            <span>أمازون: hassanshukair-21 | نون: 502539</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
