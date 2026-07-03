@@ -1,0 +1,27 @@
+{
+  "lastUpdate": "2026-07-02",
+  "products": [
+    {
+      "id": 1,
+      "name": "سماعة آبل AirPods Pro",
+      "price": "2499",
+      "oldPrice": "2999",
+      "image": "https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CHWRXH8B?tag=mushaf-21",
+      "category": "electronics",
+      "rating": 4.5,
+      "discount": "17%"
+    },
+    {
+      "id": 2,
+      "name": "ساعة سامسونج جالاكسي 6",
+      "price": "1899",
+      "oldPrice": "2299",
+      "image": "https://m.media-amazon.com/images/I/61e0gGGMgSL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CX5GFHK1?tag=mushaf-21",
+      "category": "electronics",
+      "rating": 4.7,
+      "discount": "17%"
+    }
+  ]
+}
