@@ -4,13 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر أمازون - مصحف الشقيري</title>
+
+    <!-- Amiri font was referenced in CSS but never actually loaded -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Amiri', serif;
             background: #f5f0e1;
             margin: 0;
             padding: 15px;
+            color: #2b2b2b;
         }
+
         .header {
             background: linear-gradient(135deg, #0f5132, #1a7a4d);
             color: white;
@@ -19,9 +29,76 @@
             border-radius: 12px;
             margin-bottom: 15px;
         }
+
         .header h1 {
             color: #d4af37;
             margin: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+        }
+
+        /* This class was used in the HTML but never defined anywhere */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #eee;
+        }
+
+        .product-card h3 {
+            font-size: 16px;
+            margin: 0 0 8px;
+            flex-grow: 1;
+        }
+
+        .price {
+            color: #0f5132;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            background: #d4af37;
+            color: #0f5132;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .buy-btn:hover {
+            background: #c29d2e;
+        }
+
+        .loading, .error {
+            text-align: center;
+            width: 100%;
+            grid-column: 1 / -1;
+            padding: 20px;
         }
     </style>
 </head>
@@ -30,11 +107,56 @@
         <h1>🛒 متجر أمازون</h1>
         <p>أفضل المنتجات بأفضل الأسعار</p>
     </div>
-    
+
     <div id="productsList" class="products-grid">
-        <p style="text-align:center;width:100%">جاري التحميل...</p>
+        <p class="loading">جاري التحميل...</p>
     </div>
-    
-    <script src="script.js"></script>
+
+    <script>
+        // NOTE: script.js was referenced but not provided, so this page
+        // includes a working inline example with sample products.
+        // Replace the `products` array below with your real Amazon
+        // affiliate links, or point this back to your own script.js
+        // once it defines the same renderProducts() logic.
+
+        const products = [
+            {
+                name: "مصحف كريم - طباعة فاخرة مجلد",
+                price: "150 ج.م",
+                image: "https://via.placeholder.com/300x200.png?text=مصحف+فاخر",
+                link: "#"
+            },
+            {
+                name: "مصحف جيب صغير الحجم",
+                price: "60 ج.م",
+                image: "https://via.placeholder.com/300x200.png?text=مصحف+جيب",
+                link: "#"
+            },
+            {
+                name: "مصحف تجويد ملون",
+                price: "95 ج.م",
+                image: "https://via.placeholder.com/300x200.png?text=مصحف+تجويد",
+                link: "#"
+            }
+        ];
+
+        function renderProducts(items) {
+            const container = document.getElementById('productsList');
+            if (!items || items.length === 0) {
+                container.innerHTML = '<p class="error">لا توجد منتجات لعرضها حالياً</p>';
+                return;
+            }
+            container.innerHTML = items.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" alt="${p.name}">
+                    <h3>${p.name}</h3>
+                    <div class="price">${p.price}</div>
+                    <a class="buy-btn" href="${p.link}" target="_blank" rel="noopener">اشتري الآن</a>
+                </div>
+            `).join('');
+        }
+
+        renderProducts(products);
+    </script>
 </body>
 </html>
