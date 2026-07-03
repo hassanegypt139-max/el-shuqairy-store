@@ -1,27 +1,151 @@
 {
-  "lastUpdate": "2026-07-02",
-  "products": [
+  "lastUpdate": "2026-07-03",
+  "amazon": [
     {
-      "id": 1,
+      "id": "a1",
       "name": "سماعة آبل AirPods Pro",
       "price": "2499",
       "oldPrice": "2999",
       "image": "https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg",
-      "affiliateLink": "https://www.amazon.eg/dp/B0CHWRXH8B?tag=mushaf-21",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CHWRXH8B?tag=hassanshukair-21",
       "category": "electronics",
       "rating": 4.5,
-      "discount": "17%"
+      "discount": "17%",
+      "store": "amazon"
     },
     {
-      "id": 2,
+      "id": "a2",
       "name": "ساعة سامسونج جالاكسي 6",
       "price": "1899",
       "oldPrice": "2299",
       "image": "https://m.media-amazon.com/images/I/61e0gGGMgSL._AC_SL1500_.jpg",
-      "affiliateLink": "https://www.amazon.eg/dp/B0CX5GFHK1?tag=mushaf-21",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CX5GFHK1?tag=hassanshukair-21",
       "category": "electronics",
       "rating": 4.7,
-      "discount": "17%"
+      "discount": "17%",
+      "store": "amazon"
+    },
+    {
+      "id": "a3",
+      "name": "هاتف شاومي Redmi Note 13",
+      "price": "8500",
+      "oldPrice": "9500",
+      "image": "https://m.media-amazon.com/images/I/71qpcrQTyvL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CQ2QXCH3?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.6,
+      "discount": "11%",
+      "store": "amazon"
+    },
+    {
+      "id": "a4",
+      "name": "لاب توب لينوفو IdeaPad",
+      "price": "18500",
+      "oldPrice": "21000",
+      "image": "https://m.media-amazon.com/images/I/71k3bF5g9LL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0BXVR8YL9?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.4,
+      "discount": "12%",
+      "store": "amazon"
+    },
+    {
+      "id": "a5",
+      "name": "ساعة آبل ووتش سيريس 9",
+      "price": "12500",
+      "oldPrice": "14500",
+      "image": "https://m.media-amazon.com/images/I/71Hb0v8QX1L._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CHX3QBCH?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.8,
+      "discount": "14%",
+      "store": "amazon"
+    },
+    {
+      "id": "a6",
+      "name": "مكنسة كهربائية سامسونج",
+      "price": "3200",
+      "oldPrice": "4500",
+      "image": "https://m.media-amazon.com/images/I/61oMjKfDJhL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0C9X5RT8F?tag=hassanshukair-21",
+      "category": "home",
+      "rating": 4.3,
+      "discount": "29%",
+      "store": "amazon"
+    }
+  ],
+  "noon": [
+    {
+      "id": "n1",
+      "name": "سماعات سامسونج جالاكسي Buds",
+      "price": "1899",
+      "oldPrice": "2499",
+      "image": "https://k.nooncdn.com/t_desktop-thumbnail-v2/v1682345678/12345.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/galaxy-buds/Z12345A/?utm_source=502539",
+      "category": "electronics",
+      "rating": 4.6,
+      "discount": "24%",
+      "store": "noon"
+    },
+    {
+      "id": "n2",
+      "name": "هاتف أوبو Reno 11",
+      "price": "9200",
+      "oldPrice": "11000",
+      "image": "https://k.nooncdn.com/t_desktop-thumbnail-v2/v1682345678/67890.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/oppo-reno-11/Z67890A/?utm_source=502539",
+      "category": "electronics",
+      "rating": 4.5,
+      "discount": "16%",
+      "store": "noon"
+    },
+    {
+      "id": "n3",
+      "name": "تيشيرت قطن رجالى",
+      "price": "299",
+      "oldPrice": "450",
+      "image": "https://k.nooncdn.com/t_desktop-thumbnail-v2/v1682345678/11111.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/men-tshirt/Z11111A/?utm_source=502539",
+      "category": "fashion",
+      "rating": 4.2,
+      "discount": "33%",
+      "store": "noon"
+    },
+    {
+      "id": "n4",
+      "name": "حذاء رياضي نايك",
+      "price": "1599",
+      "oldPrice": "2200",
+      "image": "https://k.nooncdn.com/t_desktop-thumbnail-v2/v1682345678/22222.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/nike-shoes/Z22222A/?utm_source=502539",
+      "category": "fashion",
+      "rating": 4.7,
+      "discount": "27%",
+      "store": "noon"
+    },
+    {
+      "id": "n5",
+      "name": "مكواة شعر فيليبس",
+      "price": "850",
+      "oldPrice": "1200",
+      "image": "https://k.nooncdn.com/t_desktop-thumbnail-v2/v1682345678/33333.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/philips-iron/Z33333A/?utm_source=502539",
+      "category": "home",
+      "rating": 4.4,
+      "discount": "29%",
+      "store": "noon"
+    },
+    {
+      "id": "n6",
+      "name": "شاشة تلفزيون سامسونج 55 بوصة",
+      "price": "12500",
+      "oldPrice": "16000",
+      "image": "https://k.nooncdn.com/t_desktop-thumbnail-v2/v1682345678/44444.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/samsung-tv/Z44444A/?utm_source=502539",
+      "category": "electronics",
+      "rating": 4.6,
+      "discount": "22%",
+      "store": "noon"
     }
   ]
 }
