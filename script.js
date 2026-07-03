@@ -1,8 +1,10 @@
 async function loadProducts() {
     try {
-const response = await fetch('https://hassanegypt139-max.github.io/mushaf-store/products.json');
+        const response = await fetch('https://hassanegypt139-max.github.io/mushaf-store/products.json');
         const data = await response.json();
-        return data.products;
+        
+        // هنا نقوم بدمج منتجات أمازون ومنتجات نون في قائمة واحدة
+        return [...data.amazon, ...data.noon];
     } catch (error) {
         console.error('خطأ في تحميل المنتجات:', error);
         return [];
@@ -30,7 +32,7 @@ async function displayProducts() {
                     ${p.oldPrice ? `<span class="old-price">${p.oldPrice} ج.م</span>` : ''}
                 </div>
                 <a href="${p.affiliateLink}" target="_blank" class="buy-btn">
-                    🛒 اشترِ من أمازون
+                    🛒 اشترِ من ${p.store === 'amazon' ? 'أمازون' : 'نون'}
                 </a>
             </div>
         </div>
