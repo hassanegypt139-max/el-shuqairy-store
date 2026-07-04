@@ -1,1 +1,1 @@
-متجر الشقيري
+el-shuqairy-store
