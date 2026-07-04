@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /sw.js
-
-Sitemap: https://hassanegypt139-max.github.io/el-shuqairy-store/sitemap.xml
