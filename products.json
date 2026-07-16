@@ -1,0 +1,204 @@
+{
+  "lastUpdate": "2026-07-05",
+  "campaign": {
+    "active": true,
+    "expiryDate": "2026-12-31T23:59:59",
+    "link": "https://s.noon.com/I8a7rkfS3HA?utm_source=502539"
+  },
+  "amazon": [
+    {
+      "id": "a1",
+      "name": "سماعة آبل AirPods Pro 2",
+      "price": "2499",
+      "oldPrice": "2999",
+      "image": "https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CHWRXH8B?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.5,
+      "discount": "17%",
+      "store": "amazon"
+    },
+    {
+      "id": "a2",
+      "name": "سامسونج جالاكسي A55 5G",
+      "price": "19999",
+      "oldPrice": "22999",
+      "image": "https://m.media-amazon.com/images/I/61V7NjE8V+L._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CX96X456?tag=hassanshukair-21",
+      "category": "mobiles",
+      "rating": 4.7,
+      "discount": "13%",
+      "store": "amazon"
+    },
+    {
+      "id": "a3",
+      "name": "هاتف شاومي Redmi Note 13 - 256GB",
+      "price": "8999",
+      "oldPrice": "10500",
+      "image": "https://m.media-amazon.com/images/I/51xTkm8N0fL._AC_SL1000_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CWPRKV5Z?tag=hassanshukair-21",
+      "category": "mobiles",
+      "rating": 4.6,
+      "discount": "14%",
+      "store": "amazon"
+    },
+    {
+      "id": "a4",
+      "name": "ساعة سامسونج جالاكسي ووتش 6 كلاسيك",
+      "price": "8664",
+      "oldPrice": "10999",
+      "image": "https://m.media-amazon.com/images/I/71GPggrgztL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CC9Y6BFY?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.7,
+      "discount": "21%",
+      "store": "amazon"
+    },
+    {
+      "id": "a5",
+      "name": "ساعة آبل ووتش سيريس 9",
+      "price": "28500",
+      "oldPrice": "32999",
+      "image": "https://m.media-amazon.com/images/I/411aTMUWgPL._AC_SL1000_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0CHX3QBCH?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.8,
+      "discount": "14%",
+      "store": "amazon"
+    },
+    {
+      "id": "a6",
+      "name": "باور بانك شاومي 165W 10000 mAh",
+      "price": "2540",
+      "oldPrice": "3200",
+      "image": "https://m.media-amazon.com/images/I/41zVNT2O9jL._AC_SL1000_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0DMWSXRV1?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.4,
+      "discount": "21%",
+      "store": "amazon"
+    },
+    {
+      "id": "a7",
+      "name": "لاب توب لينوفو IdeaPad Flex 5",
+      "price": "34999",
+      "oldPrice": "39999",
+      "image": "https://m.media-amazon.com/images/I/61IoA18YatL._AC_SL1000_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0D8JN52JY?tag=hassanshukair-21",
+      "category": "electronics",
+      "rating": 4.4,
+      "discount": "13%",
+      "store": "amazon"
+    },
+    {
+      "id": "a8",
+      "name": "شاحن سامسونج 25W أصلي USB-C",
+      "price": "350",
+      "oldPrice": "499",
+      "image": "https://m.media-amazon.com/images/I/51ki7yKWCFL._AC_SL1497_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0DLGZM8Z2?tag=hassanshukair-21",
+      "category": "parts",
+      "rating": 4.5,
+      "discount": "30%",
+      "store": "amazon"
+    },
+    {
+      "id": "a9",
+      "name": "جراب ساعة شاومي Redmi Watch 5 Active",
+      "price": "199",
+      "oldPrice": "299",
+      "image": "https://m.media-amazon.com/images/I/51iMqdzbZOL._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0DNSB3LBZ?tag=hassanshukair-21",
+      "category": "parts",
+      "rating": 4.2,
+      "discount": "33%",
+      "store": "amazon"
+    },
+    {
+      "id": "a10",
+      "name": "زجاج حماية شاومي Redmi A7 Pro",
+      "price": "89",
+      "oldPrice": "149",
+      "image": "https://m.media-amazon.com/images/I/71E2b8zQm7L._AC_SL1500_.jpg",
+      "affiliateLink": "https://www.amazon.eg/dp/B0GQZ7K89X?tag=hassanshukair-21",
+      "category": "parts",
+      "rating": 4.1,
+      "discount": "40%",
+      "store": "amazon"
+    }
+  ],
+  "noon": [
+    {
+      "id": "n1",
+      "name": "سامسونج جالاكسي A55 5G - 256GB",
+      "price": "23295",
+      "oldPrice": "25999",
+      "image": "https://f.nooncdn.com/p/pzsku/ZAC0BEED739B1042627FEZ/45/_/1772091266/d5190e74-9580-47f9-8ae2-5f8d318409f1.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/galaxy-a55-dual-sim-awesome-ice-blue-8gb-ram-256gb-5g-middle-east-version/N70049910V/p?utm_source=502539",
+      "category": "mobiles",
+      "rating": 4.6,
+      "discount": "10%",
+      "store": "noon"
+    },
+    {
+      "id": "n2",
+      "name": "سامسونج جالاكسي A16 - 128GB",
+      "price": "9427",
+      "oldPrice": "10999",
+      "image": "https://f.nooncdn.com/p/pzsku/Z3423916CAF5B372ED84CZ/45/_/1772091258/cfacd761-e562-4274-8cb6-2e4267666972.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/galaxy-a16-dual-sim-4g-black-4gb-ram-128gb-middle-east-version/N70126887V/p?utm_source=502539",
+      "category": "mobiles",
+      "rating": 4.4,
+      "discount": "14%",
+      "store": "noon"
+    },
+    {
+      "id": "n3",
+      "name": "شاومي Redmi Note 13 Pro - 256GB",
+      "price": "16089",
+      "oldPrice": "18500",
+      "image": "https://f.nooncdn.com/p/pzsku/ZDA370407D732F9FE8D1FZ/45/_/1780466922/017d4be5-e103-4df1-a3b4-528a7118c5af.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/redmi-note-13-pro-dual-sim-midnight-black-8gb-ram-256gb-global-version/N70035010V/p?utm_source=502539",
+      "category": "mobiles",
+      "rating": 4.7,
+      "discount": "13%",
+      "store": "noon"
+    },
+    {
+      "id": "n4",
+      "name": "زجاج حماية سامسونج A55 بريميوم",
+      "price": "149",
+      "oldPrice": "250",
+      "image": "https://f.nooncdn.com/p/pzsku/Z67E50A4935C5828FBF84Z/45/_/1721514789/f8698209-0bec-4ad6-bef0-228ec1c57df8.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/samsung-galaxy-a55-premium-tempered-glass-screen-protector-black/Z0955D894BFEC849F3A0DZ/p?utm_source=502539",
+      "category": "parts",
+      "rating": 4.3,
+      "discount": "40%",
+      "store": "noon"
+    },
+    {
+      "id": "n5",
+      "name": "شاحن USB-C 25W سريع مع كابل",
+      "price": "249",
+      "oldPrice": "399",
+      "image": "https://f.nooncdn.com/p/pzsku/Z9E989D0C39C44C16C30FZ/45/_/1779713244/1f41091d-5ce2-4b29-bf67-f0f640294fac.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/25w-usb-c-fast-wall-charger-with-type-c-cable-super-fast-charging-sfc-compatible-with-samsung-galaxy-android/Z4C84FAE57B5B7A0D5ED8Z/p?utm_source=502539",
+      "category": "parts",
+      "rating": 4.2,
+      "discount": "38%",
+      "store": "noon"
+    },
+    {
+      "id": "n6",
+      "name": "زجاج حماية A55 خصوصي ضد التجسس",
+      "price": "179",
+      "oldPrice": "299",
+      "image": "https://f.nooncdn.com/p/pzsku/Z72CECCD843469D2D280EZ/45/1753278361/17b49539-aa91-4475-afae-4d441f1cbd77.jpg",
+      "affiliateLink": "https://www.noon.com/egypt-ar/for-samsung-galaxy-a55-5g-2-pieces-privacy-tempered-glass-screen-protector-anti-spy-9h-hardness-privacy-screen-glass-film-tempered-glass-anti-scratch-screen-protector/Z72CECCD843469D2D280EZ/p?utm_source=502539",
+      "category": "parts",
+      "rating": 4.0,
+      "discount": "40%",
+      "store": "noon"
+    }
+  ]
+}
