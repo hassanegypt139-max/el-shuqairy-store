@@ -92,6 +92,15 @@
             footerBlog: 'المدونة',
             footerBlogText: 'تابع مدونة الشقيري للمواد التجارية للحصول على أحدث العروض والتخفيضات والمراجعات.',
             footerAffiliate: 'روابط أفيليت | أمازون: hassanshukair-21 | نون: 502539',
+            trustTitle: 'لماذا يتسوق آلاف الطلاب من متجر الشقيري؟',
+            trustCard1Title: 'مختار بعناية لطلاب التجارة',
+            trustCard1Desc: 'كل منتج في المتجر تم اختباره واختياره خصيصاً ليناسب احتياجات طلاب الكلية التجارية، من سماعات المحاضرات إلى الأدوات المكتبية والهواتف بأسعار مناسبة للطلاب.',
+            trustCard2Title: 'أرخص سعر مضمون',
+            trustCard2Desc: 'نقارن الأسعار يومياً بين أمازون ونون ونعرض لك أرخص عرض متاح. نوفر لك كوبونات خصم حصرية تساعدك على التوفير أكثر في كل عملية شراء.',
+            trustCard3Title: 'تسوق آمن 100%',
+            trustCard3Desc: 'الشراء يتم مباشرة من أمازون مصر أو نون مصر، أكبر المتاجر الموثوقة عالمياً. نحن نوفر لك أفضل العروض فقط وأنت تشتري بأمان تام من المتجر الرسمي.',
+            trustCard4Title: 'تقييمات حقيقية من مستخدمين',
+            trustCard4Desc: 'كل منتج مرفق بتقييمات ومراجعات حقيقية من مشترين فعليين على أمازون ونون. تقييمات شفافة تساعدك على اتخاذ قرار الشراء الصحيح.',
             searchPlaceholder: 'ابحث عن منتج...',
             currency: 'ج.م',
             savings: 'توفير',
@@ -191,6 +200,15 @@
             footerBlog: 'Blog',
             footerBlogText: 'Follow Al-Shukairi Commercial Materials blog for the latest deals, discounts, and reviews.',
             footerAffiliate: 'Affiliate Links | Amazon: hassanshukair-21 | Noon: 502539',
+            trustTitle: 'Why do thousands of students shop at Shuqairi Store?',
+            trustCard1Title: 'Curated for Commerce Students',
+            trustCard1Desc: 'Every product has been tested and selected to suit the needs of commerce college students, from lecture earphones to office supplies and phones at student-friendly prices.',
+            trustCard2Title: 'Lowest Price Guaranteed',
+            trustCard2Desc: 'We compare prices daily between Amazon and Noon and show you the cheapest available offer. We provide exclusive discount coupons to help you save more on every purchase.',
+            trustCard3Title: '100% Secure Shopping',
+            trustCard3Desc: 'Purchases are made directly from Amazon Egypt or Noon Egypt, the largest globally trusted stores. We only provide the best offers and you buy safely from the official store.',
+            trustCard4Title: 'Real User Reviews',
+            trustCard4Desc: 'Every product includes real ratings and reviews from actual buyers on Amazon and Noon. Transparent ratings to help you make the right purchase decision.',
             searchPlaceholder: 'Search for a product...',
             currency: 'EGP',
             savings: 'You save',
@@ -541,30 +559,40 @@
         }
     }
 
-    // ===== ADMIN ACCESS =====
+    // ===== ADMIN ACCESS (HIDDEN FROM VISITORS) =====
     function initAdmin() {
-        if (state.adminUnlocked) {
-            DOM.adminBtn.style.display = 'flex';
+        // إزالة زر الإدمن من الصفحة تماماً - لا يظهر لأي زائر
+        if (DOM.adminBtn) {
+            DOM.adminBtn.style.display = 'none';
+            DOM.adminBtn.remove();
         }
-        // Triple-click on logo to unlock admin
-        let clickCount = 0;
-        let clickTimer;
-        const logo = document.querySelector('.header-logo');
-        if (logo) {
-            logo.addEventListener('click', () => {
-                clickCount++;
-                clearTimeout(clickTimer);
-                if (clickCount >= 5) {
-                    clickCount = 0;
-                    state.adminUnlocked = true;
-                    localStorage.setItem(CONFIG.ADMIN_KEY, 'true');
-                    DOM.adminBtn.style.display = 'flex';
-                    showToast('Admin panel unlocked!', 'info');
-                } else {
-                    clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
-                }
-            });
+
+        // لوحة التحكم تُفتح فقط بكلمة سر من URL
+        // مثال: https://yoursite.com/?admin=ShuqairyAdmin2026
+        const urlParams = new URLSearchParams(window.location.search);
+        const adminCode = urlParams.get('admin');
+
+        if (adminCode === 'ShuqairyAdmin2026') {
+            state.adminUnlocked = true;
+            const tempBtn = document.createElement('button');
+            tempBtn.className = 'header-btn';
+            tempBtn.id = 'adminBtnTemp';
+            tempBtn.title = 'لوحة التحكم';
+            tempBtn.setAttribute('aria-label', 'لوحة التحكم');
+            tempBtn.innerHTML = '<span>\u2699</span>';
+            tempBtn.style.cssText = 'display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(15,81,50,0.1);border:none;cursor:pointer;font-size:18px;transition:all 0.2s;';
+            tempBtn.addEventListener('click', function() { openAdmin(); });
+            var headerActions = document.querySelector('.header-actions');
+            if (headerActions) {
+                headerActions.appendChild(tempBtn);
+            }
+            // مسح المعامل من URL فوراً حتى لا يُحفظ في السجل
+            window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+            showToast('تم تفعيل لوحة التحكم', 'info');
         }
+
+        // مسح أي قيمة قديمة للإدمن من localStorage
+        localStorage.removeItem(CONFIG.ADMIN_KEY);
     }
 
     // ===== NAVIGATION CATEGORIES =====
